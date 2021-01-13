@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% block content %}
+<style>
+</style>
+{% if request.user.is_authenticated %}
+{% for post in posts %}
+    <h4>{{post.message}}</h4>
+    <b><p>Posted by: <a href="{% url 'detailpost' post.user.username %}">@{{post.user.username}}</a></p></b>
+    <p>{{post.date_created}} in {{post.group}}</p>
+{% endfor %}
+{% if len_number == 0 %}
+<a href="{% url 'addmembers' group.id %}"><button>Subcribe</button></a>  
+{% else %}
+<a href="{% url 'deletemembers' group.id %}"><button>Leave</button></a> 
+{% endif %}
+<br>
+{% for message in messages %}
+{{message}}
+{% endfor%}
+{% else %}
+{% endif %}
+{% endblock %}

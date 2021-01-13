@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <div id="first">
+            <div class="myform form ">
+                <div class="logo mb-3">
+                    <div class="col-md-12 text-center">
+                        <h1>Login</h1>
+                    </div>
+                </div>
+                    <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First Name</label>
+                        {{form.first_name}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Last Name</label>
+                        {{form.last_name}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        {{form.email}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Password</label>
+                        {{form.password1}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Confirm Passwrod</label>
+                        {{form.password2}}
+                    </div>
+                    <div class="col-md-12 text-center ">
+                        <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">SignUp</button>
+                    </div>
+                    <div class="form-group">
+                        <p class="text-center">You have an account? <a href="{% url 'login' %}" id="signup">Login here</a></p>
+                    </div>
+                    </form>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='First Name..';
+		form_fields[2].placeholder='Last Name..';
+		form_fields[3].placeholder='Username...';
+        form_fields[4].placeholder='Email...';
+        form_fields[5].placeholder='Password...';
+        form_fields[6].placeholder='Re-enter Password...';
+        
+
+
+		for (var field in form_fields){	
+			form_fields[field].className += 'form-control'
+		}
+</script>
+{% endblock %}

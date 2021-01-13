@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% block content %}
+<style>
+</style>
+
+<div class="row">
+    <div class="col-5">
+        {% if user.is_authenticated %}
+        <h2>Welcome back
+            <br>
+        <a href="{% url 'detailpost' request.user.username%}">@{{request.user.username}}</a></h2>
+        <br>
+        <h3>Groups</h3>
+        <p>Welcome to the Groups page! Select a Group with a shared interest!</p>
+        <a href="{% url 'creategroup' %}"><button type="button" class="btn btn-warning">Create a new Group!</button></a>
+        {%else%}
+        <h2>Welcome,
+            <br>
+        Login please!</h2>
+        <br>
+        {%endif%}
+    </div>
+    <div class="col-md-7">
+        <div class="list-group">
+            {% for group in groups %}
+              <a class="list-group-item list-group-item-action"" href="{% url 'posts' group.id %}">
+                     <h3 class="title list-group-item-heading">{{ group.title}}</h3>
+                <div class="list-group-item-text container-fluid">
+                    {{ group.text}}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="badge">{{ group.count_members.count }}</span> member{{ group.count_members.count|pluralize }}
+                        </div>
+                        <div class="col-md-4">
+                            <span class="badge">{{ group.count_comment.count }}</span> post{{ group.count_comment.count|pluralize }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
